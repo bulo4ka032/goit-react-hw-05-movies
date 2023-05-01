@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams, Outlet } from 'react-router-dom';
 import { getMovieByQuery } from 'services/fetchMovies';
 import { Container, Form, Title, Submit, Input } from './Movie.styled';
 import { BsSearchHeart } from 'react-icons/bs';
+import Loader from '../../components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
 import sad from '../../img/sad.png';
 import Error from 'components/Error/Error';
@@ -58,6 +59,9 @@ const Movies = () => {
       ) : (
         <Error message={`No results for ${query}`} img={sad} />
       )}
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 };
