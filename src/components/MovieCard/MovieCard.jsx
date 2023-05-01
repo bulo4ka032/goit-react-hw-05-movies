@@ -10,7 +10,7 @@ import {
   GenresTitle,
   ScoreNum,
 } from './MovieCard.styled';
-
+import FileNotFound from '../../img/FileNotFound.jpg';
 const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, overview, genres, vote_average } =
     movie;
@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
   const scores = `${vote_average.toFixed(1)} / 10`;
   return (
     <Container>
-      <Poster src={poster} alt="" width="280" />
+      <Poster src={!poster_path ? FileNotFound : poster} alt="" width="280" />
       <div>
         <Title>
           {title} ({year})
