@@ -13,15 +13,10 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [status, setStatus] = useState('start');
   useEffect(() => {
-    // setStatus('start');
-
     const query = searchParams.get('query') ?? '';
 
     getMovieByQuery(query).then(setMovies);
 
-    // if (query) {
-    //   setStatus('start');
-    // }
     if (movies.length > 0) {
       setStatus('resolved');
     }
