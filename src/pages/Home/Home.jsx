@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTrandibgMovies } from 'services/fetchMovies';
-
+import { Title } from './Home.styled';
 import MoviesList from 'components/MoviesList/MoviesList';
 
 const Home = () => {
@@ -12,6 +12,7 @@ const Home = () => {
 
   return (
     <div>
+      <Title>Trending to week</Title>
       <MoviesList movies={movies} />
     </div>
   );
