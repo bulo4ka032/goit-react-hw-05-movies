@@ -6,16 +6,20 @@ import { BsSearchHeart } from 'react-icons/bs';
 import MoviesList from 'components/MoviesList/MoviesList';
 import sad from '../../img/sad.png';
 import Error from 'components/Error/Error';
+import Start from 'components/Start/Start';
 const Movies = () => {
-  const [movies, setMovies] = useState(['hello']);
+  const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const [status, setStatus] = useState('start');
   useEffect(() => {
     const query = searchParams.get('query') ?? '';
 
     getMovieByQuery(query).then(setMovies);
-  }, [searchParams]);
+    if (movies.length > 0) {
+      setStatus('resolved');
+    }
+  }, [searchParams, movies]);
 
   const handleChange = evt => {
     setQuery(evt.target.value);
@@ -24,7 +28,6 @@ const Movies = () => {
     evt.preventDefault();
     setSearchParams(query !== '' ? { query } : {});
   };
-
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -41,10 +44,12 @@ const Movies = () => {
           <BsSearchHeart />
         </Submit>
       </Form>
-      {movies.length === 0 ? (
-        <Error message="Try too search" img={sad} />
-      ) : (
+      {status === 'start' ? (
+        <Start />
+      ) : status === 'resolved' ? (
         <MoviesList movies={movies} />
+      ) : (
+        <Error message="Try too search" img={sad} />
       )}
     </Container>
   );
