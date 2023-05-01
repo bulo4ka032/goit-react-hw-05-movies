@@ -7,6 +7,8 @@ import {
   MoviesTitle,
 } from './MoviesList.styled';
 import FileNotFound from '../../img/FileNotFound.jpg';
+import PropTypes from 'prop-types';
+
 const MoviesList = ({ movies }) => {
   const location = useLocation();
   const imgBaseUrl = 'https://image.tmdb.org/t/p/w500/';
@@ -25,6 +27,18 @@ const MoviesList = ({ movies }) => {
       ))}
     </MoviesSList>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      poster_path: PropTypes.string,
+      title: PropTypes.string,
+      overview: PropTypes.string,
+      original_title: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default MoviesList;
