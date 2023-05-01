@@ -26,5 +26,25 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  background-color: #e0dddd;
+  background-color: #eef1ff;
+  min-height: 100vh;
+`;
+
+export const FooterDaco = styled.img`
+  width: 300px;
+  margin: 0 auto;
+`;
+
+export const Footer = styled.footer`
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const FooterText = styled.p`
+  text-transform: uppercase;
+  font-size: 20px;
+  margin: 40px;
 `;

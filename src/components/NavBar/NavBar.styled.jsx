@@ -18,4 +18,11 @@ export const NavItem = styled(NavLink)`
   &.active {
     font-weight: 450;
   }
+
+  &:hover,
+  &:focus {
+    color: white;
+    font-weight: 500;
+    text-decoration: underline;
+  }
 `;

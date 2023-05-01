@@ -1,3 +1,16 @@
+import {
+  Container,
+  Poster,
+  Title,
+  Score,
+  OverviewTitle,
+  Overview,
+  Genre,
+  GenresList,
+  GenresTitle,
+  ScoreNum,
+} from './MovieCard.styled';
+
 const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, overview, genres, vote_average } =
     movie;
@@ -5,25 +18,25 @@ const MovieCard = ({ movie }) => {
   const year = release_date.slice(0, 4);
   const scores = `${vote_average.toFixed(1)} / 10`;
   return (
-    <div>
-      <img src={poster} alt="" width="280" />
+    <Container>
+      <Poster src={poster} alt="" width="280" />
       <div>
-        <h1>
+        <Title>
           {title} ({year})
-        </h1>
-        <p>
-          User score: <span>{scores}</span>
-        </p>
-        <h2>Overview</h2>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <ul>
+        </Title>
+        <Score>
+          User score: <ScoreNum>{scores}</ScoreNum>
+        </Score>
+        <OverviewTitle>Overview</OverviewTitle>
+        <Overview>{overview}</Overview>
+        <GenresTitle>Genres</GenresTitle>
+        <GenresList>
           {genres.map(({ name, id }) => (
-            <li key={id}>{name}</li>
+            <Genre key={id}>{name}</Genre>
           ))}
-        </ul>
+        </GenresList>
       </div>
-    </div>
+    </Container>
   );
 };
 

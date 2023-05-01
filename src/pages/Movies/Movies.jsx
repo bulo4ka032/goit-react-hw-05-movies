@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovieByQuery } from 'services/fetchMovies';
+import { Container, Form, Title, Submit, Input } from './Movie.styled';
+import { BsSearchHeart } from 'react-icons/bs';
 import MoviesList from 'components/MoviesList/MoviesList';
-
+import sad from '../../img/sad.png';
+import Error from 'components/Error/Error';
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(['hello']);
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,16 +26,27 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <Container>
+      <Form onSubmit={handleSubmit}>
         <label>
-          <p>Search Film</p>
-          <input type="text" onChange={handleChange} />
+          <Title>Search Film</Title>
+          <Input
+            type="text"
+            onChange={handleChange}
+            placeholder="Search search search"
+            required
+          />
         </label>
-        <button type="submit">Search</button>
-      </form>
-      <MoviesList movies={movies} />
-    </div>
+        <Submit type="submit">
+          <BsSearchHeart />
+        </Submit>
+      </Form>
+      {movies.length === 0 ? (
+        <Error message="Try too search" img={sad} />
+      ) : (
+        <MoviesList movies={movies} />
+      )}
+    </Container>
   );
 };
 

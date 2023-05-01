@@ -1,8 +1,16 @@
 import { useEffect, useState, Suspense } from 'react';
-import { useLocation, useParams, Link, Outlet } from 'react-router-dom';
+import { useLocation, useParams, Outlet } from 'react-router-dom';
 import { getMovieById } from 'services/fetchMovies';
 import MovieCard from 'components/MovieCard/MovieCard';
-
+import Loader from 'components/Loader/Loader';
+import {
+  Arrow,
+  GoBack,
+  GoBackText,
+  Container,
+  CastRevLink,
+  MoreContainer,
+} from './MovieDetails.styled';
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
@@ -15,21 +23,26 @@ const MovieDetails = () => {
   if (!movieDetails) return null;
 
   return (
-    <div>
-      <Link to={backLink}>Go Back</Link>
+    <Container>
       <MovieCard movie={movieDetails} />
       <div>
-        <Link to={'cast'} state={{ from: backLink }}>
-          Cast
-        </Link>
-        <Link to={'reviews'} state={{ from: backLink }}>
-          Reviews
-        </Link>
+        <GoBack to={backLink}>
+          <Arrow />
+          <GoBackText>Go Back</GoBackText>
+        </GoBack>
+        <MoreContainer>
+          <CastRevLink to={'cast'} state={{ from: backLink }}>
+            Cast
+          </CastRevLink>
+          <CastRevLink to={'reviews'} state={{ from: backLink }}>
+            Reviews
+          </CastRevLink>
+        </MoreContainer>
       </div>
-      <Suspense fallback={<div>LOADING SUBPAGE...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </div>
+    </Container>
   );
 };
 
