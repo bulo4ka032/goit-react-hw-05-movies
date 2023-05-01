@@ -13,9 +13,15 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [status, setStatus] = useState('start');
   useEffect(() => {
+    // setStatus('start');
+
     const query = searchParams.get('query') ?? '';
 
     getMovieByQuery(query).then(setMovies);
+
+    // if (query) {
+    //   setStatus('start');
+    // }
     if (movies.length > 0) {
       setStatus('resolved');
     }
@@ -23,9 +29,13 @@ const Movies = () => {
 
   const handleChange = evt => {
     setQuery(evt.target.value);
+    setStatus('start');
   };
   const handleSubmit = evt => {
     evt.preventDefault();
+    if (movies.length === 0 && query) {
+      setStatus('nothing');
+    }
     setSearchParams(query !== '' ? { query } : {});
   };
   return (
@@ -48,8 +58,10 @@ const Movies = () => {
         <Start />
       ) : status === 'resolved' ? (
         <MoviesList movies={movies} />
+      ) : !query ? (
+        <Start />
       ) : (
-        <Error message="Try too search" img={sad} />
+        <Error message={`No results for ${query}`} img={sad} />
       )}
     </Container>
   );

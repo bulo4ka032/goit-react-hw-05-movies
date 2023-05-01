@@ -11,4 +11,5 @@ export const ErrorMessage = styled.p`
 
 export const ErrorContainer = styled.div`
   text-align: center;
+  margin-top: -50px;
 `;
