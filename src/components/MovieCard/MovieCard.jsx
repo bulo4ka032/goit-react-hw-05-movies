@@ -11,6 +11,8 @@ import {
   ScoreNum,
 } from './MovieCard.styled';
 import FileNotFound from '../../img/FileNotFound.jpg';
+import PropTypes from 'prop-types';
+
 const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, overview, genres, vote_average } =
     movie;
@@ -38,6 +40,17 @@ const MovieCard = ({ movie }) => {
       </div>
     </Container>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    overview: PropTypes.string,
+    genres: PropTypes.array,
+    vote_average: PropTypes.number,
+  }),
 };
 
 export default MovieCard;
